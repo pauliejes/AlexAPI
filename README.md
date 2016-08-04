@@ -46,3 +46,7 @@ If you havent installed Raspbian on your Pi, follow install instructions [here](
 4.) Type <code>python main.py</code>
 
 5.) If eveything goes smoothly, you should be greeted by Alexa.
+
+## How to use
+
+To prompt Alexa, hold down the Joystick and ask your question.
