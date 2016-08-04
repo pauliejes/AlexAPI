@@ -32,4 +32,17 @@ If you havent installed Raspbian on your Pi, follow install instructions [here](
 
 ## Installing Alexa
 
-<code></code>
+1.) Clone this project <code>git clone https://github.com/pauliejes/AlexAPI.git</code>
+
+2.) cd into new directory <code>cd AlexAPI</code>
+
+3.) run <code>sudo ./setup.sh</code>
+* From here you will be promped for the ProductID you set up earlier. Enter it exactly as it appears in your developer console.
+* Next you will be asked to enter your Security Profile Description. Enter it exactly as it appears in your developer console.
+* Next, copy and paste your Security Profile ID, Client ID, and Client Secrete as promped.
+* Now open up a web browser and enter your PI's Ip address followed by :5000, you should be greeted by a login from amazon.
+* Login and agree to terms and conditions. You should see a long refresh token which is automatically added to the configuration so you do not need it. Exit the browser, then exit the setup script.
+
+4.) Type <code>python main.py</code>
+
+5.) If eveything goes smoothly, you should be greeted by Alexa.
