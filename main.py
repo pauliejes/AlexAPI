@@ -26,14 +26,16 @@ print "Welcome to Alexa. I will help you in anyway I can.\n  Press Ctrl-C to qui
 sense = SenseHat() # Initialise the SenseHAT
 sense.clear()  # Blank the LED matrix
 
+#Setup for posting to an LRS
 auth = "Basic %s" % base64.b64encode("%s:%s" % ("AlexAPI", "hello123"))
 headers = { 'Authorization': auth,
         'content-type': 'application/json',
         'X-Experience-API-Version': '1.0.2'
 }
+#LRS Endpoint
 stmt_endpoint = "https://lrs.adlnet.gov/xapi/statements"
 
-# POST EXAMPLE
+# POST EXAMPLE for xAPI
 post_payload = {
         "actor": {
             "mbox": "mailto:alexAPI@amazon.com"
@@ -117,6 +119,7 @@ def press_button():
     l, data = inp.read()
     if l:
         audio += data
+# Below is the code to post your statement to an LRS
         post_resp = requests.post(stmt_endpoint, data=json.dumps(post_payload), headers=headers, verify=False)
         print post_resp.content
         print post_resp.status_code
