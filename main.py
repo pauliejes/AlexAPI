@@ -13,6 +13,10 @@ import alsaaudio
 import wave
 import numpy
 import copy
+import requests
+import json
+import base64
+import urllib
 from evdev import InputDevice, list_devices, ecodes
 
 import alexa_helper # Import the web functions of Alexa, held in a separate program in this directory
@@ -21,6 +25,34 @@ print "Welcome to Alexa. I will help you in anyway I can.\n  Press Ctrl-C to qui
 
 sense = SenseHat() # Initialise the SenseHAT
 sense.clear()  # Blank the LED matrix
+
+auth = "Basic %s" % base64.b64encode("%s:%s" % ("AlexAPI", "hello123"))
+headers = { 'Authorization': auth,
+        'content-type': 'application/json',
+        'X-Experience-API-Version': '1.0.2'
+}
+stmt_endpoint = "https://lrs.adlnet.gov/xapi/statements"
+
+# POST EXAMPLE
+post_payload = {
+        "actor": {
+            "mbox": "mailto:alexAPI@amazon.com"
+        },
+        "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/passed",
+            "display": {
+                "en": "verbed"
+            }
+        },
+        "object": {
+            "id": "http://activity.com/id"
+        },
+
+        "result": {
+            "success": True
+        }
+    }
+
 
 # Search for the SenseHAT joystick
 found = False
@@ -85,6 +117,10 @@ def press_button():
     l, data = inp.read()
     if l:
         audio += data
+        post_resp = requests.post(stmt_endpoint, data=json.dumps(post_payload), headers=headers, verify=False)
+        print post_resp.content
+        print post_resp.status_code
+
 
 # Whilst button is being pressed, continue recording and set "loudness"
 def continue_pressed():
