@@ -51,7 +51,7 @@ If you havent installed Raspbian on your Pi, follow install instructions [here](
 
 To prompt Alexa, hold down the Joystick and ask your question.
 
-##xAPI
+## xAPI
 
 Everytime you ask Alexa a question, she will send a statement to the ADL LRS using xAPI.
 
